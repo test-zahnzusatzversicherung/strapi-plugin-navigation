@@ -26,6 +26,7 @@ interface IProps {
   onItemEdit: VoidEffect;
   onItemRestore: VoidEffect;
   dragRef: MutableRefObject<HTMLHeadingElement>;
+  menuAttached: boolean;
   isSearchActive?: boolean;
 }
 
@@ -42,6 +43,7 @@ export const ItemCardHeader: FC<IProps> = ({
   onItemEdit,
   onItemRestore,
   dragRef,
+  menuAttached,
   isSearchActive,
 }) => {
   const { formatMessage } = useIntl();
@@ -68,6 +70,16 @@ export const ItemCardHeader: FC<IProps> = ({
         <Flex>{icon}</Flex>
       </Flex>
       <Flex alignItems="center" style={wrapperStyle}>
+        <ItemCardBadge
+          borderColor={menuAttached ? 'success200' : 'neutral200'}
+          backgroundColor={menuAttached ? 'success100' : 'neutral100'}
+          textColor={menuAttached ? 'success600' : 'neutral600'}
+          small
+        >
+          {formatMessage(
+            getTrad(`components.navigationItem.badge.${menuAttached ? 'attached' : 'notAttached'}`)
+          )}
+        </ItemCardBadge>
         {removed && (
           <ItemCardBadge borderColor="danger200" backgroundColor="danger100" textColor="danger600">
             {formatMessage(getTrad('components.navigationItem.badge.removed'))}

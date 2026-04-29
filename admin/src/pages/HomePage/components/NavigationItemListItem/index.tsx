@@ -365,6 +365,7 @@ export const Item: React.FC<Props> = ({
               }}
               onItemRestore={() => onItemRestore({ ...item, viewParentId })}
               dragRef={refs.dragRef}
+              menuAttached={!!mappedItem.menuAttached}
               removed={mappedItem.removed}
               canUpdate={canUpdate}
               isSearchActive={mappedItem.isSearchActive}

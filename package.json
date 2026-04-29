@@ -136,7 +136,6 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "husky install",
     "publish:latest": "npm publish --tag latest",
     "publish:beta": "npm publish --tag beta",
     "build": "yarn clean && strapi-plugin build --minify",
