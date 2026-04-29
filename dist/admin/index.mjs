@@ -41,6 +41,7 @@ const de = "navigation", ka = ({ setPlugin: e }) => {
   }
 ), ja = () => /* @__PURE__ */ n(Va, {}), zt = {
   en: () => import("../_chunks/en-L50uvYty.mjs"),
+  de: () => import("../_chunks/de-C330VYhA.mjs"),
   fr: () => import("../_chunks/fr-DWobxKQZ.mjs"),
   ca: () => import("../_chunks/ca-BGB_PMcy.mjs")
 }, It = (e) => `${de}.${e}`, l = (e, t) => ({

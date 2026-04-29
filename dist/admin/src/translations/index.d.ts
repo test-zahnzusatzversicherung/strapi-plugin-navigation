@@ -3,6 +3,7 @@ import type { EN } from './en';
 export type TranslationPath = Path<EN>;
 declare const trads: {
     en: () => Promise<typeof import("./en")>;
+    de: () => Promise<typeof import("./de")>;
     fr: () => Promise<typeof import("./fr")>;
     ca: () => Promise<typeof import("./ca")>;
 };
