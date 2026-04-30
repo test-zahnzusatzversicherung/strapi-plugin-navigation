@@ -2,6 +2,7 @@ import {
   IconButton as BaseIconButton,
   IconButtonGroup,
   Flex,
+  Tooltip,
   Typography,
 } from '@strapi/design-system';
 import { FC, MutableRefObject, ReactNode } from 'react';
@@ -13,7 +14,14 @@ import { VoidEffect } from '../../../../../types';
 import { usePluginMediaQuery } from '../../../hooks';
 import DragButton from '../../DragButton';
 import { ItemCardBadge } from '../ItemCardBadge';
-import { CardItemTitle } from './Wrapper';
+import {
+  CardHeaderActions,
+  CardHeaderMain,
+  CardHeaderText,
+  CardItemTitle,
+  PathText,
+  TruncatedText,
+} from './Wrapper';
 import { eyeIcon, pencilIcon, arrowClockwise, trashIcon } from './icons';
 
 interface IProps {
@@ -29,9 +37,6 @@ interface IProps {
   menuAttached: boolean;
   isSearchActive?: boolean;
 }
-
-const wrapperStyle = { zIndex: 2 };
-const pathWrapperStyle = { maxWidth: '425px' };
 
 export const ItemCardHeader: FC<IProps> = ({
   title,
@@ -52,24 +57,38 @@ export const ItemCardHeader: FC<IProps> = ({
 
   return (
     <CardItemTitle>
-      <Flex alignItems="center">
+      <CardHeaderMain>
         {canUpdate && <DragButton ref={dragRef} isActive={isSearchActive} />}
-        <Typography variant="omega" fontWeight="bold" fontSize={isSmallMobile ? '12px' : '14px'}>
-          {title}
-        </Typography>
-        <Typography
-          variant="omega"
-          fontWeight="bold"
-          textColor="neutral500"
-          fontSize={isSmallMobile ? '12px' : '14px'}
-          ellipsis
-          style={pathWrapperStyle}
-        >
-          {path}
-        </Typography>
+        <CardHeaderText>
+          <TruncatedText title={title}>
+            <Typography
+              variant="omega"
+              fontWeight="bold"
+              fontSize={isSmallMobile ? '12px' : '14px'}
+              ellipsis
+            >
+              {title}
+            </Typography>
+          </TruncatedText>
+          {path && (
+            <Tooltip description={path}>
+              <PathText>
+                <Typography
+                  variant="omega"
+                  fontWeight="bold"
+                  textColor="neutral500"
+                  fontSize={isSmallMobile ? '12px' : '14px'}
+                  ellipsis
+                >
+                  {path}
+                </Typography>
+              </PathText>
+            </Tooltip>
+          )}
+        </CardHeaderText>
         <Flex>{icon}</Flex>
-      </Flex>
-      <Flex alignItems="center" style={wrapperStyle}>
+      </CardHeaderMain>
+      <CardHeaderActions>
         <ItemCardBadge
           borderColor={menuAttached ? 'success200' : 'neutral200'}
           backgroundColor={menuAttached ? 'success100' : 'neutral100'}
@@ -87,7 +106,7 @@ export const ItemCardHeader: FC<IProps> = ({
         )}
         <IconButtonGroup>
           <IconButton
-            isActive={isSearchActive}
+            $isActive={isSearchActive}
             disabled={removed}
             onClick={onItemEdit}
             label={formatMessage(
@@ -97,45 +116,45 @@ export const ItemCardHeader: FC<IProps> = ({
               )
             )}
             children={canUpdate ? pencilIcon : eyeIcon}
-            isMobile={isSmallMobile}
+            $isMobile={isSmallMobile}
           />
           {canUpdate && (
             <>
               {removed ? (
                 <IconButton
-                  isActive={isSearchActive}
+                  $isActive={isSearchActive}
                   onClick={onItemRestore}
                   label={formatMessage(
                     getTrad('components.navigationItem.action.restore', 'Restore')
                   )}
                   variant="success-light"
                   children={arrowClockwise}
-                  isMobile={isSmallMobile}
+                  $isMobile={isSmallMobile}
                 />
               ) : (
                 <IconButton
-                  isActive={isSearchActive}
+                  $isActive={isSearchActive}
                   onClick={onItemRemove}
                   variant="danger-light"
                   label={formatMessage(
                     getTrad('components.navigationItem.action.remove', 'Remove')
                   )}
                   children={trashIcon}
-                  isMobile={isSmallMobile}
+                  $isMobile={isSmallMobile}
                 />
               )}
             </>
           )}
         </IconButtonGroup>
-      </Flex>
+      </CardHeaderActions>
     </CardItemTitle>
   );
 };
 
-const IconButton = styled(BaseIconButton)<{ isActive?: boolean; isMobile?: boolean }>`
+const IconButton = styled(BaseIconButton)<{ $isActive?: boolean; $isMobile?: boolean }>`
   transition: background-color 0.3s ease-in;
-  ${({ isActive, theme }) => (isActive ? `background-color: ${theme.colors.neutral150} ;` : '')}
-  height: ${({ isMobile }) => (isMobile ? '24px' : '32px')};
-  width: ${({ isMobile }) => (isMobile ? '24px' : '32px')};
-  padding: ${({ isMobile, theme }) => (isMobile ? theme.spaces[1] : theme.spaces[2])};
+  ${({ $isActive, theme }) => ($isActive ? `background-color: ${theme.colors.neutral150} ;` : '')}
+  height: ${({ $isMobile }) => ($isMobile ? '24px' : '32px')};
+  width: ${({ $isMobile }) => ($isMobile ? '24px' : '32px')};
+  padding: ${({ $isMobile, theme }) => ($isMobile ? theme.spaces[1] : theme.spaces[2])};
 `;
