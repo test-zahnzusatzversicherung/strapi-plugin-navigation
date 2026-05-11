@@ -503,6 +503,8 @@ const en = {
         removed: 'Removed',
         draft: 'Draft',
         published: 'Published',
+        attached: 'Attached',
+        notAttached: 'Not attached',
       },
       related: {
         localeMissing: '(Locale version missing)',

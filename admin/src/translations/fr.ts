@@ -511,6 +511,8 @@ const fr = {
         removed: 'Supprimé',
         draft: 'Brouillon',
         published: 'Publié',
+        attached: 'Attaché',
+        notAttached: 'Non attaché',
       },
       related: {
         localeMissing: '(Version locale manquante)',

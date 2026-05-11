@@ -506,6 +506,8 @@ const en = {
         removed: 'Eliminado',
         draft: 'Borrador',
         published: 'Publicado',
+        attached: 'Adjunto',
+        notAttached: 'No adjunto',
       },
       related: {
         localeMissing: '(Versión de idioma faltante)',

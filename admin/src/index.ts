@@ -10,6 +10,12 @@ import trads from './translations';
 const name = 'navigation';
 const displayName = 'Navigation';
 
+const globalFallbackTranslations: Partial<Record<string, Record<string, string>>> = {
+  de: {
+    'content-manager.plugin.name': 'Content Manager',
+  },
+};
+
 export default {
   register(app: any) {
     app.createSettingSection(
@@ -65,13 +71,18 @@ export default {
           const typedLocale = locale as keyof typeof trads;
           return trads[typedLocale]().then(({ default: trad }) => {
             return {
-              data: prefixPluginTranslations(flattenObject(trad), PLUGIN_ID),
+              data: {
+                ...globalFallbackTranslations[locale],
+                ...prefixPluginTranslations(flattenObject(trad), PLUGIN_ID),
+              },
               locale,
             };
           });
         }
         return {
-          data: prefixPluginTranslations(flattenObject({}), PLUGIN_ID),
+          data:
+            globalFallbackTranslations[locale] ??
+            prefixPluginTranslations(flattenObject({}), PLUGIN_ID),
           locale,
         };
       })

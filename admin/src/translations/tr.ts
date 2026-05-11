@@ -502,6 +502,8 @@ const tr = {
         removed: 'Kaldırıldı',
         draft: 'Taslak',
         published: 'Yayınlandı',
+        attached: 'Menüye bağlı',
+        notAttached: 'Menüye bağlı değil',
       },
       related: {
         localeMissing: '(Yerel sürüm eksik)',

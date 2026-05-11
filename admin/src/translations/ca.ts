@@ -504,6 +504,8 @@ const ca = {
         removed: 'Supprimé',
         draft: 'Brouillon',
         published: 'Publié',
+        attached: 'Attaché',
+        notAttached: 'Non attaché',
       },
       related: {
         localeMissing: '(Falta la versió local)',
